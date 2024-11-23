@@ -85,6 +85,7 @@ resource "azurerm_virtual_desktop_host_pool" "hostpool" {
   tags = {
     owner       = "martinyang"
     cost_center = "108"
+    workload    = "VDI"
   }
 }
 
