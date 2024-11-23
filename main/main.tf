@@ -79,7 +79,15 @@ resource "azurerm_virtual_desktop_host_pool" "hostpool" {
   validate_environment = true
 }
 
+resource "azurerm_virtual_desktop_application_group" "desktopapp" {
+  name                = "desktop-app-group"
+  location            = azurerm_resource_group.app_service.location
+  resource_group_name = "avd-rg"
+  type                = "Desktop"
+  host_pool_id        = azurerm_virtual_desktop_host_pool.hostpool.id
+}
+
 resource "azurerm_virtual_desktop_workspace_application_group_association" "workspaceremoteapp" {
   workspace_id         = azurerm_virtual_desktop_workspace.workspace.id
-  application_group_id = azurerm_virtual_desktop_host_pool.hostpool.id
+  application_group_id = azurerm_virtual_desktop_application_group.desktopapp.id
 }
