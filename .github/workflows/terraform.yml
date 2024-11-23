@@ -48,6 +48,7 @@ jobs:
         terraform import azurerm_virtual_desktop_workspace.workspace /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/workspaces/ws-01
         terraform import azurerm_virtual_desktop_host_pool.hostpool /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/hostPools/pd-hp-01
         terraform import azurerm_log_analytics_workspace.example /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/infra-rg/providers/Microsoft.OperationalInsights/workspaces/mylab-law-01
+        terraform import azurerm_virtual_desktop_application_group.desktopapp /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/applicationGroups/desktop-app-group
       continue-on-error: false   
 
     - name: Terraform Plan
