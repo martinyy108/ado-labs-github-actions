@@ -6,9 +6,9 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    use_azuread_auth = true # Removes the need to use SA keys
-  }
+  # backend "azurerm" {
+  #   use_azuread_auth = true # Removes the need to use SA keys
+  # }
 }
 
 provider "azurerm" {
