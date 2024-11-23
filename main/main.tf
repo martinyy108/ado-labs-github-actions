@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "app_service" {
   }
 }
 
-/* resource "azurerm_app_service_plan" "app_service" {
+resource "azurerm_app_service_plan" "app_service" {
   name                = local.app_service_plan_name
   location            = azurerm_resource_group.app_service.location
   resource_group_name = azurerm_resource_group.app_service.name
@@ -63,4 +63,23 @@ resource "azurerm_app_service" "app_service" {
     cost_center = "108"
   }
 }
- */
+
+resource "azurerm_virtual_desktop_workspace" "workspace" {
+  name                = "ws-01"
+  location            = azurerm_resource_group.app_service.location
+  resource_group_name = "avd-rg"
+}
+
+resource "azurerm_virtual_desktop_host_pool" "hostpool" {
+  name                 = "pd-hp-01"
+  location             = azurerm_resource_group.app_service.location
+  resource_group_name  = "avd-rg"
+  type                 = "Personal"
+  load_balancer_type   = "Persistent"
+  validate_environment = true
+}
+
+resource "azurerm_virtual_desktop_workspace_application_group_association" "workspaceremoteapp" {
+  workspace_id         = azurerm_virtual_desktop_workspace.workspace.id
+  application_group_id = azurerm_virtual_desktop_host_pool.hostpool.id
+}
