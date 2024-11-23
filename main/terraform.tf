@@ -12,6 +12,9 @@ terraform {
 
 provider "azurerm" {
   features {}
+}
+
+terraform {
   backend "azurerm" {
     key = "app.terraform.tfstate"
   }
