@@ -23,28 +23,29 @@ resource "azurerm_virtual_network" "main" {
 
   subnet {
     name             = "firewall-subnet"
-    address_prefixes = ["172.16.0.0/24"]
+    address_prefixes = "172.16.0.0/24"
   }
 
   subnet {
     name             = "vpn-gateway-subnet"
-    address_prefixes = ["172.16.1.0/24"]
+    address_prefixes = "172.16.1.0/24"
   }
 
   subnet {
     name             = "vms-subnet"
-    address_prefixes = ["172.16.2.0/24"]
+    address_prefixes = "172.16.2.0/24"
   }
 
   subnet {
     name             = "private-endpoints-subnet"
-    address_prefixes = ["172.16.3.0/24"]
+    address_prefixes = "172.16.3.0/24"
   }
 
   subnet {
     name             = "app-services-subnet"
-    address_prefixes = ["172.16.4.0/24"]
+    address_prefixes = "172.16.4.0/24"
   }
+
 }
 
 ##################################################################################
