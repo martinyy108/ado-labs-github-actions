@@ -22,28 +22,28 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = "infra-rg"
 
   subnet {
-    name           = "firewallsubnet"
-    address_prefix = ["172.16.0.0/24"]
+    name             = "firewallsubnet"
+    address_prefixes = "172.16.0.0/24"
   }
 
   subnet {
-    name           = "vpngatewaysubnet"
-    address_prefix = ["172.16.1.0/24"]
+    name             = "vpngatewaysubnet"
+    address_prefixes = "172.16.1.0/24"
   }
 
   subnet {
-    name           = "vmssubnet"
-    address_prefix = ["172.16.2.0/24"]
+    name             = "vmssubnet"
+    address_prefixes = "172.16.2.0/24"
   }
 
   subnet {
-    name           = "privateendpointssubnet"
-    address_prefix = ["172.16.3.0/24"]
+    name             = "privateendpointssubnet"
+    address_prefixes = "172.16.3.0/24"
   }
 
   subnet {
-    name           = "appservicessubnet"
-    address_prefix = ["172.16.4.0/24"]
+    name             = "appservicessubnet"
+    address_prefixes = "172.16.4.0/24"
   }
 
 }
