@@ -22,43 +22,43 @@ resource "azurerm_virtual_network" "example" {
   #dns_servers         = ["10.0.0.4", "10.0.0.5"]
 
   subnet {
-    name           = "fw-subnet"
-    address_prefix = "10.0.1.0/24"
+    name             = "fw-subnet"
+    address_prefixes = ["10.0.1.0/24"]
   }
 
   subnet {
-    name           = "gw-subnet"
-    address_prefix = "10.0.2.0/24"
+    name             = "gw-subnet"
+    address_prefixes = ["10.0.2.0/24"]
     #security_group   = azurerm_network_security_group.example.id
   }
 
   subnet {
-    name           = "vm-subnet"
-    address_prefix = "10.0.3.0/24"
+    name             = "vm-subnet"
+    address_prefixes = ["10.0.3.0/24"]
     #security_group   = azurerm_network_security_group.example.id
   }
 
   subnet {
-    name           = "pe-subnet"
-    address_prefix = "10.0.4.0/24"
+    name             = "pe-subnet"
+    address_prefixes = ["10.0.4.0/24"]
     #security_group   = azurerm_network_security_group.example.id
   }
 
   subnet {
-    name           = "app-subnet"
-    address_prefix = "10.0.5.0/24"
+    name             = "app-subnet"
+    address_prefixes = ["10.0.5.0/24"]
     #security_group   = azurerm_network_security_group.example.id
   }
 
   subnet {
-    name           = "db-subnet"
-    address_prefix = "10.0.6.0/24"
+    name             = "db-subnet"
+    address_prefixes = ["10.0.6.0/24"]
     #security_group   = azurerm_network_security_group.example.id
   }
 
   subnet {
-    name           = "waf-subnet"
-    address_prefix = "10.0.7.0/24"
+    name             = "waf-subnet"
+    address_prefixes = ["10.0.7.0/24"]
     #security_group   = azurerm_network_security_group.example.id
   }
 
