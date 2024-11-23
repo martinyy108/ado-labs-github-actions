@@ -14,12 +14,12 @@ resource "random_integer" "name_suffix" {
 ##################################################################################
 # VIRTUAL NETWORK
 ##################################################################################
-
-resource "azurerm_virtual_network" "main" {
+resource "azurerm_virtual_network" "example" {
   name                = "my-vnet-01"
-  address_space       = ["10.0.0.0/16"]
-  location            = var.location
+  location            = "australiaeast"
   resource_group_name = "infra-rg"
+  address_space       = ["10.0.0.0/16"]
+  #dns_servers         = ["10.0.0.4", "10.0.0.5"]
 
   subnet {
     name             = "subnet1"
@@ -32,6 +32,9 @@ resource "azurerm_virtual_network" "main" {
     #security_group   = azurerm_network_security_group.example.id
   }
 
+  tags = {
+    environment = "Production"
+  }
 }
 
 ##################################################################################
