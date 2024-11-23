@@ -3,7 +3,7 @@ name: 'Terraform'
 on: [push, pull_request]
 
 env:
-  TF_LOG: INFO
+  TF_LOG: WARN
 
 jobs:
   terraform:
