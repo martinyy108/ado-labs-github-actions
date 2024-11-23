@@ -8,6 +8,10 @@ terraform {
       version = "~> 3.74.0"
     }
   }
+
+  provider "azurerm" {
+    features {}
+  }
   backend "azurerm" {
     key = "app.terraform.tfstate"
   }
