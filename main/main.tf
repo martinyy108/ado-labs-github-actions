@@ -12,6 +12,42 @@ resource "random_integer" "name_suffix" {
 }
 
 ##################################################################################
+# VIRTUAL NETWORK
+##################################################################################
+
+resource "azurerm_virtual_network" "main" {
+  name                = "main-vnet"
+  address_space       = ["172.16.0.0/21"]
+  location            = var.location
+  resource_group_name = "avd-rg"
+
+  subnet {
+    name             = "firewall-subnet"
+    address_prefixes = ["172.16.0.0/24"]
+  }
+
+  subnet {
+    name             = "vpn-gateway-subnet"
+    address_prefixes = ["172.16.1.0/24"]
+  }
+
+  subnet {
+    name             = "vms-subnet"
+    address_prefixes = ["172.16.2.0/24"]
+  }
+
+  subnet {
+    name             = "private-endpoints-subnet"
+    address_prefixes = ["172.16.3.0/24"]
+  }
+
+  subnet {
+    name             = "app-services-subnet"
+    address_prefixes = ["172.16.4.0/24"]
+  }
+}
+
+##################################################################################
 # VIRTUAL DESKTOP
 ##################################################################################
 

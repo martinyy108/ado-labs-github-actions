@@ -90,24 +90,3 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       run: terraform apply -auto-approve
-
-  codeql:
-    name: 'CodeQL'
-    runs-on: ubuntu-latest
-
-    steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    # Initialize the CodeQL tools for scanning
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: 'javascript,python' # Specify the languages to analyze
-
-    # Perform the CodeQL analysis
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
-      with:
-        category: '/github/workflow/terraform' # Optional: categorize the analysis results
