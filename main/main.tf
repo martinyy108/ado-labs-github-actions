@@ -16,33 +16,33 @@ resource "random_integer" "name_suffix" {
 ##################################################################################
 
 resource "azurerm_virtual_network" "main" {
-  name                = "main-vnet"
+  name                = "my-vnet-01"
   address_space       = ["172.16.0.0/21"]
   location            = var.location
-  resource_group_name = "avd-rg"
+  resource_group_name = "infra-rg"
 
   subnet {
-    name             = "firewall-subnet"
+    name             = "firewallsubnet"
     address_prefixes = ["172.16.0.0/24"]
   }
 
   subnet {
-    name             = "vpn-gateway-subnet"
+    name             = "vpngatewaysubnet"
     address_prefixes = ["172.16.1.0/24"]
   }
 
   subnet {
-    name             = "vms-subnet"
+    name             = "vmssubnet"
     address_prefixes = ["172.16.2.0/24"]
   }
 
   subnet {
-    name             = "private-endpoints-subnet"
+    name             = "privateendpointssubnet"
     address_prefixes = ["172.16.3.0/24"]
   }
 
   subnet {
-    name             = "app-services-subnet"
+    name             = "appservicessubnet"
     address_prefixes = ["172.16.4.0/24"]
   }
 
