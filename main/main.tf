@@ -56,11 +56,7 @@ resource "azurerm_virtual_network" "example" {
     #security_group   = azurerm_network_security_group.example.id
   }
 
-  subnet {
-    name             = "waf-subnet"
-    address_prefixes = ["10.0.7.0/24"]
-    #security_group   = azurerm_network_security_group.example.id
-  }
+
 
   tags = {
     environment = "Production"
