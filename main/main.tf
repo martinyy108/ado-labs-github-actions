@@ -91,3 +91,20 @@ resource "azurerm_virtual_desktop_workspace_application_group_association" "work
   workspace_id         = azurerm_virtual_desktop_workspace.workspace.id
   application_group_id = azurerm_virtual_desktop_application_group.desktopapp.id
 }
+
+##################################################################################
+# LOG ANALYTICS WORKSPACE
+##################################################################################
+
+resource "azurerm_log_analytics_workspace" "example" {
+  name                = "log-analytics-workspace"
+  location            = var.location
+  resource_group_name = "infra-rg"
+  sku                 = "PerGB2018"
+
+  retention_in_days = 30
+
+  tags = {
+    environment = "production"
+  }
+}
