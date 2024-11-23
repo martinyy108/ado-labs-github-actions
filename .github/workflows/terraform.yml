@@ -46,6 +46,15 @@ jobs:
       run: terraform plan -no-color
       continue-on-error: false
 
+    - name: Terraform Show
+      id: show
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      run: terraform show -no-color
+
     - name: add-plan-comment
       id: comment
       uses: actions/github-script@v3
