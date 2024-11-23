@@ -71,12 +71,18 @@ resource "azurerm_virtual_desktop_workspace" "workspace" {
 }
 
 resource "azurerm_virtual_desktop_host_pool" "hostpool" {
-  name                 = "pd-hp-01"
-  location             = azurerm_resource_group.app_service.location
-  resource_group_name  = "avd-rg"
-  type                 = "Personal"
-  load_balancer_type   = "Persistent"
-  validate_environment = true
+  name                             = "pd-hp-01"
+  location                         = azurerm_resource_group.app_service.location
+  resource_group_name              = "avd-rg"
+  type                             = "Personal"
+  load_balancer_type               = "Persistent"
+  validate_environment             = true
+  personal_desktop_assignment_type = "Automatic"
+
+  tags = {
+    owner       = "martinyang"
+    cost_center = "108"
+  }
 }
 
 resource "azurerm_virtual_desktop_application_group" "desktopapp" {
@@ -97,7 +103,7 @@ resource "azurerm_virtual_desktop_workspace_application_group_association" "work
 ##################################################################################
 
 resource "azurerm_log_analytics_workspace" "example" {
-  name                = "log-analytics-workspace"
+  name                = "mylab-law-01"
   location            = var.location
   resource_group_name = "infra-rg"
   sku                 = "PerGB2018"
