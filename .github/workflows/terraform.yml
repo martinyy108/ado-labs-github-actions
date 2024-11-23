@@ -42,7 +42,7 @@ jobs:
       run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
 
 
-    # Run a terraform plan for pull requests only
+    # Run a terraform plan
     - name: Terraform Plan
       id: plan
       env:
@@ -50,7 +50,6 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      if: github.event_name == 'pull_request'
       run: terraform plan -no-color
     
     # Add a comment to pull requests with plan results
