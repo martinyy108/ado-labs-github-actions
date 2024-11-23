@@ -36,21 +36,21 @@ jobs:
         CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
       run: terraform init -upgrade -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
 
-    - name: Terraform Import
-      id: import
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      run: |
-        terraform import azurerm_virtual_network.example /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/infra-rg/providers/Microsoft.Network/virtualNetworks/my-vnet-01
-        terraform import azurerm_virtual_desktop_workspace.workspace /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/workspaces/ws-01
-        terraform import azurerm_virtual_desktop_host_pool.hostpool /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/hostPools/pd-hp-01
-        terraform import azurerm_log_analytics_workspace.example /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/infra-rg/providers/Microsoft.OperationalInsights/workspaces/mylab-law-01
-        terraform import azurerm_virtual_desktop_application_group.desktopapp /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/applicationGroups/desktop-app-group
-        terraform import azurerm_virtual_desktop_workspace_application_group_association.workspaceremoteapp "/subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/workspaces/ws-01|/subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/applicationGroups/desktop-app-group"
-      continue-on-error: false   
+    # - name: Terraform Import
+    #   id: import
+    #   env:
+    #     ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+    #     ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+    #     ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+    #     ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+    #   run: |
+    #     terraform import azurerm_virtual_network.example /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/infra-rg/providers/Microsoft.Network/virtualNetworks/my-vnet-01
+    #     terraform import azurerm_virtual_desktop_workspace.workspace /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/workspaces/ws-01
+    #     terraform import azurerm_virtual_desktop_host_pool.hostpool /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/hostPools/pd-hp-01
+    #     terraform import azurerm_log_analytics_workspace.example /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/infra-rg/providers/Microsoft.OperationalInsights/workspaces/mylab-law-01
+    #     terraform import azurerm_virtual_desktop_application_group.desktopapp /subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/applicationGroups/desktop-app-group
+    #     terraform import azurerm_virtual_desktop_workspace_application_group_association.workspaceremoteapp "/subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/workspaces/ws-01|/subscriptions/b8e9db95-46a2-417b-84f4-4fca6c6a9733/resourceGroups/avd-rg/providers/Microsoft.DesktopVirtualization/applicationGroups/desktop-app-group"
+    #   continue-on-error: false   
 
     - name: Terraform Plan
       id: plan
@@ -62,43 +62,43 @@ jobs:
       run: terraform plan -no-color
       continue-on-error: false
 
-    - name: Terraform Show
-      id: show
-      env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      run: terraform show -no-color
+    # - name: Terraform Show
+    #   id: show
+    #   env:
+    #     ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+    #     ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+    #     ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+    #     ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+    #   run: terraform show -no-color
 
-    - name: add-plan-comment
-      id: comment
-      uses: actions/github-script@v3
-      if: github.event_name == 'pull_request'
-      env:
-        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-          #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
-          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+    # - name: add-plan-comment
+    #   id: comment
+    #   uses: actions/github-script@v3
+    #   if: github.event_name == 'pull_request'
+    #   env:
+    #     PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+    #   with:
+    #     github-token: ${{ secrets.GITHUB_TOKEN }}
+    #     script: |
+    #       const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+    #       #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+    #       #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
+    #       #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
       
-          <details><summary>Show Plan</summary>
+    #       <details><summary>Show Plan</summary>
           
-          \`\`\`${process.env.PLAN}\`\`\`
+    #       \`\`\`${process.env.PLAN}\`\`\`
           
-          </details>
+    #       </details>
           
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+    #       *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
             
-          github.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: output
-          })
+    #       github.issues.createComment({
+    #         issue_number: context.issue.number,
+    #         owner: context.repo.owner,
+    #         repo: context.repo.repo,
+    #         body: output
+    #       })
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.plan.outcome == 'success'
